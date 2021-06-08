@@ -41,20 +41,25 @@ public class BookingRestController {
 	    @PostMapping("/bookingregister")
 	    public ResponseEntity<BookingDto> register(HttpSession session, @RequestBody BookingDto bookingDto) {
 	    	
-	    	// 로그인 id 
-	    	bookingDto.setBookerId((Long) session.getAttribute("loginId"));
-	    	bookingDto.setBookerName((String) session.getAttribute("loginName"));
-	    	System.out.println("## BFF의 RestContoller /bookingregister --loginName");
+	    	// 예약자 세션정보로 변경 
+	    	if (session.getAttribute("loginId") !=null) {
+	    	  	bookingDto.setBookerId((Long) session.getAttribute("loginId"));
+		    	bookingDto.setBookerName((String) session.getAttribute("loginName"));
+	    	}
+	    		    	
+	    	System.out.println("## BFF의 RestContoller /bookingregister --getBookerId");
+	    	System.out.println(bookingDto.getBookerId());
+	    	System.out.println("## BFF의 RestContoller /bookingregister --getBookerName");
 	    	System.out.println(bookingDto.getBookerName());
-	    	
 	    	System.out.println("## BFF의 RestContoller /bookingregister --getStatus");
 	    	System.out.println(bookingDto.getBookStatus());
 	    	System.out.println("## BFF의 RestContoller /bookingregister --getdate");
 	    	System.out.println(bookingDto.getBookdate());
+	    	System.out.println("## BFF의 RestContoller /bookingregister --getAvailableParkingLotId");
+	    	System.out.println(bookingDto.getParkingLotId());
 	    	System.out.println("## BFF의 RestContoller /bookingregister --getAvailableParkingLotName");
 	    	System.out.println(bookingDto.getParkingLotName());
-	    	System.out.println("## BFF의 RestContoller /bookingregister --getBookerName");
-	    	System.out.println(bookingDto.getBookerName());
+
 	        return new ResponseEntity<BookingDto>(bookingService.register(bookingDto), HttpStatus.OK);
 	      }   
 	    

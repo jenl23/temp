@@ -5,6 +5,11 @@
 	
 	//alert(longi);
 	
+	
+	if(lati == "" ){
+		alert("목적지를 선택해주세요.")
+	}
+	
 	data["lati"] = lati;
 	data["longi"] = longi;
 				
@@ -24,7 +29,7 @@
                         '<div class="card border-left-info shadow h-80 py-3">' +
                             '<div class="card-body">' +
                                 '<div class="row no-gutters align-items-center">' +
-                                    '<div class="col mr-2">' +
+                                    '<div class="col mr-2" onClick="parking_onClick(\''+ data[i].id + '\', \'' + data[i].name +'\', \'' + data[i].capacity +'\', \'' +data[i].openTime +'\', \'' + data[i].endTime +'\', \'' + data[i].address + '\');">' +
                                         '<div class="text-xs font-weight-bold text-info text-uppercase mb-1">'+data[i].companyName+' '+ data[i].area +'</div>' +
                                         '<div class="row no-gutters align-items-center">' +
                                             '<div class="col-auto">' +
@@ -51,3 +56,15 @@
 	}
 })
 });
+
+function parking_onClick(id, name, capacity, openTime, endTime, address){	
+
+	document.getElementById("parkingLotId").value = id;
+	document.getElementById("parkingLotName").value = name;
+	document.getElementById("address").value = address;
+	document.getElementById("capacity").value = capacity;
+	document.getElementById("openTime").value = openTime;
+	document.getElementById("endTime").value = endTime;
+	
+	
+}
